@@ -1,4 +1,4 @@
-
+package com.lsenseney.btmemorize.model;
 import java.util.stream.Stream;
 import java.io.IOException;
 import java.io.FileReader;
@@ -11,16 +11,16 @@ import java.util.Scanner;
  **/
 public class Memorize {
     public static void main(String[] args) throws IOException{
-        Scanner scan = new Scanner(System.in);
-        BufferedReader file = new BufferedReader(new FileReader(args[0]));
-        if(args.length == 2){
-            if(args[1].equals("-t")){
-                Node tree = buildTree(file.lines());
-                quiz(tree.toString(), scan, .04);
-            }else
-                treeApproach(file.lines(), Integer.valueOf(args[1]), .04);
-        }else
-            treeApproach(file.lines(), .04);
+//        Scanner scan = new Scanner(System.in);
+//        BufferedReader file = new BufferedReader(new FileReader(args[0]));
+//        if(args.length == 2){
+//            if(args[1].equals("-t")){
+//                Node tree = buildTree(file.lines());
+//                quiz(tree.toString(), scan, .04);
+//            }else
+//                treeApproach(file.lines(), Integer.valueOf(args[1]), .04);
+//        }else
+//            treeApproach(file.lines(), .04);
     }
 
     public static void treeApproach(Stream<String> verses, int startVerse, double allowedDiff){

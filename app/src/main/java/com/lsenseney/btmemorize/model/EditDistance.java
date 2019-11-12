@@ -1,3 +1,5 @@
+package com.lsenseney.btmemorize.model;
+
 import java.util.LinkedList;
 import java.util.HashSet;
 import java.util.PriorityQueue;
@@ -68,7 +70,8 @@ public class EditDistance {
         while(cur != null && (bestFinished == null || cur.changesToHere < bestFinished.changesToHere)){
             int startIndex = cur.startIndex;
             int destIndex = cur.destIndex;
-            if(!workspace.computeIfAbsent(startIndex, i -> new HashSet<>()).contains(destIndex)){
+            Set<Integer> atStart = workspace.get(startIndex);
+            if(atStart != null && atStart.contains(destIndex)){
                 workspace.get(startIndex).add(destIndex);
                 if(startIndex == start.length() && destIndex == dest.length()){
                     if(bestFinished == null || bestFinished.changesToHere > cur.changesToHere)
@@ -152,13 +155,22 @@ public class EditDistance {
     private static final int DEL = 1;
     private static final int INS = 2;
 
-    private static final Function<Integer, Map<Integer, EditDistance>> empty = i -> new HashMap<>();
     private static EditDistance get(Map<Integer, Map<Integer, EditDistance>> map, int x, int y){
-        return map.computeIfAbsent(x, empty).get(y);
+        Map<Integer, EditDistance> src = map.get(x);
+        if (src == null) {
+            return null;
+        } else {
+            return src.get(y);
+        }
     }
 
     private static void put(Map<Integer, Map<Integer, EditDistance>> map, int x, int y, EditDistance d){
-        map.computeIfAbsent(x, empty).put(y, d);
+        Map<Integer, EditDistance> dest= map.get(x);
+        if (dest != null) {
+            dest = new HashMap<>();
+            map.put(x, dest);
+        }
+        dest.put(y, d);
     }
     public static EditDistance editDistanceDynamic(String start, String dest){
         final Map<Integer, Map<Integer, EditDistance>> workspace = new HashMap<>();
