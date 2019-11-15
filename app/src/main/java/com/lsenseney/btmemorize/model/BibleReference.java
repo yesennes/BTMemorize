@@ -1,22 +1,22 @@
 package com.lsenseney.btmemorize.model;
 
 public class BibleReference {
-    public String version;
-    public String book;
-    public int startChapter;
-    public int endChapter;
-    public int startVerse;
-    public int endVerse;
+    public final String version;
+    public final Book book;
+    public final int startChapter;
+    public final int endChapter;
+    public final int startVerse;
+    public final int endVerse;
 
-    public BibleReference(String book, String version, int chapter) {
+    public BibleReference(Book book, String version, int chapter) {
         this(book, version, chapter, 1, Integer.MAX_VALUE);
     }
 
-    public BibleReference(String book, String version, int chapter, int startVerse, int endVerse) {
+    public BibleReference(Book book, String version, int chapter, int startVerse, int endVerse) {
         this(book, version, chapter, chapter, startVerse, endVerse);
     }
 
-    public BibleReference(String book, String version, int startChappter, int endChapter, int startVerse, int endVerse) {
+    public BibleReference(Book book, String version, int startChappter, int endChapter, int startVerse, int endVerse) {
         this.book = book;
         this.version = version;
         this.startChapter = startChappter;
@@ -27,7 +27,7 @@ public class BibleReference {
 
     @Override
     public String toString() {
-        String ans = this.book;
+        String ans = this.book.toString();
         if (endChapter == Integer.MAX_VALUE) {
             if (startChapter != 1) {
                 ans += " " + startChapter + "-";
