@@ -77,7 +77,11 @@ public class APIBible {
         raw.enqueue(new Callback<RawAPIBible.DataWrapper<List<Book>>>() {
             @Override
             public void onResponse(Call<RawAPIBible.DataWrapper<List<Book>>> call, Response<RawAPIBible.DataWrapper<List<Book>>> response) {
-                callback.accept(response.body().data);
+                List<Book> books = response.body().data;
+                if (books.get(0).name.equals("intro")) {
+                    books.remove(0);
+                }
+                callback.accept(books);
             }
 
             @Override
@@ -88,6 +92,10 @@ public class APIBible {
                 }
             }
         });
+    }
+
+    public void getChapter(String version, Consumer<BibleDatum> callback, Consumer<Throwable> onError) {
+
     }
 
 

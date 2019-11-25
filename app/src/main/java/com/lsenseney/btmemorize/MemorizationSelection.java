@@ -6,20 +6,18 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
 
 import com.lsenseney.btmemorize.model.APIBible;
 import com.lsenseney.btmemorize.model.Book;
-import com.lsenseney.btmemorize.model.Chapter;
+import com.lsenseney.btmemorize.model.ChapterReference;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class MemorizationSelection extends AppCompatActivity {
     private ArrayAdapter<String> versionAdepter;
     private ArrayAdapter<Book> bookAdapter;
-    private ArrayAdapter<Chapter> startChapterAdapter;
-    private ArrayAdapter<Chapter> endChapterAdapter;
+    private ArrayAdapter<ChapterReference> startChapterAdapter;
+    private ArrayAdapter<ChapterReference> endChapterAdapter;
 
     private APIBible apiBible;
 
@@ -70,6 +68,25 @@ public class MemorizationSelection extends AppCompatActivity {
         Spinner startChapterSpinner = findViewById(R.id.start_chapter_selector);
         startChapterAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, new ArrayList<>());
         startChapterSpinner.setAdapter(startChapterAdapter);
+        startChapterSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                endChapterAdapter.clear();
+                for (int i = position; i < startChapterAdapter.getCount(); i++) {
+                    endChapterAdapter.add(startChapterAdapter.getItem(i));
+                }
+                endChapterAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        Spinner endChapterSpinner = findViewById(R.id.end_chapter_selector);
+        endChapterAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, new ArrayList<>());
+        endChapterSpinner.setAdapter(endChapterAdapter);
 
         version.setSelection(0);
     }

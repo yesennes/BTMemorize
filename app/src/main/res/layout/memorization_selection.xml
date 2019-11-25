@@ -57,5 +57,11 @@
             android:layout_height="wrap_content"
             android:id="@+id/end_chapter_selector"/>
     </LinearLayout>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Memorize!"
+        app:layout_constraintTop_toBottomOf="@id/book_selector"
+        app:layout_constraintRight_toRightOf="@id/book_selector"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

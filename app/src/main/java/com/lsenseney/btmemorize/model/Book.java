@@ -5,7 +5,7 @@ import java.util.List;
 public class Book {
     public final String name;
     public final String id;
-    public final List<Chapter> chapters;
+    public final List<ChapterReference> chapters;
 
     //Empty constructor for moshi
     @SuppressWarnings("unused")

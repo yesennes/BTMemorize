@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">BTMemorize</string>
+    <string name="title_activity_memorize">Memorize</string>
 </resources>

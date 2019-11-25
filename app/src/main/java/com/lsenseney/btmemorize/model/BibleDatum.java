@@ -1,8 +1,10 @@
 package com.lsenseney.btmemorize.model;
 
+import java.util.List;
+
 public class BibleDatum {
     private BibleReference reference;
-    private BibleReference text;
+    private List<String> text;
     private BibleDatum first;
     private BibleDatum second;
 
